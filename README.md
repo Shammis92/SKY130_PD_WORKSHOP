@@ -28,4 +28,5 @@ Day 5 - Final steps for RTL2GDS
 
          - Routing and design rule check (DRC)
          - PNR interactive flow tutorial
-# Day1
+# Day1 - Inception of open-source EDA, OpenLane and Sky130 PDK
+# How to talk to computers
