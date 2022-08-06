@@ -111,3 +111,60 @@ Day 5 - Final steps for RTL2GDS
 
 8) flop ratio can be calculated after the synthesis by (total number of flops)/(total number of cells)
  
+# Day2 - Undestand importance of good floorplan vs Bad floorplan and introduction to library cells
+
+mostly focusing on the floorplan constraints, concept of decoupling cells, power planning and finally performing the floorplan and reviewing the floorplan in magic 
+
+1)For defining width and height of CORE and DIE
+
+      a.	Dimensions of standard cells is crucial part, and the number of standard cells present in the design 
+      
+      b.	So, these values can be pre-estimated based on the amount of logic present in the design 
+      
+      c.	Two terminologies are used for dimension of the design utilization factor and aspect ratio
+      
+      d.	Utilization_factor = (Area occupied by netlist)/(Total area of the core)
+      
+      e.	Aspect_ratio = (height of die/width of die)
+
+![image](https://user-images.githubusercontent.com/110658068/183250804-a6f7969e-452b-4bc9-8137-720f276757f9.png)
+
+2)	Preplaced cells: - these are the cells which are manually placed by the designer during the floor planning, after the placement of these cells these cells are not touched in later stage of the design
+
+![image](https://user-images.githubusercontent.com/110658068/183250851-46518b44-432f-4394-b7bf-61041de08402.png)
+
+3)	Need for decoupling capacitance:- A decoupling capacitor is a capacitor, which is used decouple the critical cells from main power supply, in order to protect the cells from the disturbance occurring in the power distribution lines and source
+
+![image](https://user-images.githubusercontent.com/110658068/183250867-60326015-41fe-43e2-8d3d-9ade3cb2b623.png)
+
+4)	Power planning: - Power planning means to provide power to every macros, standard cells, and all other cells are present in the design
+
+![image](https://user-images.githubusercontent.com/110658068/183250881-b753cfdb-38a1-4fc5-b2ca-94f5a20aedb9.png)
+
+# Running the actual floorplan in the tool
+
+1)	By using below command floorplan can be created
+       a.	Type run_floorplan
+       
+       ![image](https://user-images.githubusercontent.com/110658068/183250930-09eb6db8-1675-4519-afa8-1edec527051e.png)
+
+2)	Floorplan will be created after this step and can be seen in magic using command
+
+![image](https://user-images.githubusercontent.com/110658068/183250969-fa0fb131-547d-42d2-8b1c-d63d8522f6ad.png)
+
+![image](https://user-images.githubusercontent.com/110658068/183250984-3ed05f96-9e3e-4b2b-afea-18a83881d853.png)
+
+![image](https://user-images.githubusercontent.com/110658068/183250998-c913d22b-20d2-4d1c-915f-1f83dcf43aa4.png)
+
+# Running the actual placement of the design
+
+1)	By using the below command final placement of the standard cells done in the design
+
+![image](https://user-images.githubusercontent.com/110658068/183251031-3bee8099-c83d-467f-9e44-4f0ede211d3c.png)
+
+2)	Placement is done after this step and placed design can be view by magic
+
+![image](https://user-images.githubusercontent.com/110658068/183251046-00bd4972-7bf3-46ba-89d2-7f4890f1194a.png)
+
+
+
