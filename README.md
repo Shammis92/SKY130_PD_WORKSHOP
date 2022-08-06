@@ -167,4 +167,73 @@ mostly focusing on the floorplan constraints, concept of decoupling cells, power
 ![image](https://user-images.githubusercontent.com/110658068/183251046-00bd4972-7bf3-46ba-89d2-7f4890f1194a.png)
 
 
+# Day3 - Design Library cell using Magic layout and ngspice characterization
+
+1)	Creation of SPICE deck for CMOS inverter
+        
+        a.	Component connectivity
+        
+        b.	Component values
+        
+        c.	Identify nodes
+        
+        d.	Name nodes
+
+![image](https://user-images.githubusercontent.com/110658068/183262345-407f5126-999d-4f03-9784-22dabf7a501f.png)
+
+2)	Command to download the data for already created inverter
+
+![image](https://user-images.githubusercontent.com/110658068/183262372-4771ac42-c3c1-4f9a-b15e-5f7f27d22aeb.png)
+
+3)	Opening the inverter in the magic 
+            
+            a.	magic -T sky130A.tech sky130_inv.mag &
+
+![image](https://user-images.githubusercontent.com/110658068/183262398-811665f7-6f36-4693-92fb-bd2743ed2982.png)
+
+4)	extracting the inverter from magic
+          
+          a.	extract all
+          
+          b.	ext2spice cthresh 0 rthresh 0
+          
+          c.	ext2spice
+
+![image](https://user-images.githubusercontent.com/110658068/183262424-786711ab-1ae4-45b8-9e81-224bf30e39af.png)
+
+          d.	generated files are sky130_inv.ext and sky130_inv.spice
+
+![image](https://user-images.githubusercontent.com/110658068/183262450-17ea43bd-921d-40af-977d-e6601354e3c5.png)
+
+5)	Corrections and addition in the .spice file
+           
+           a.	Scale value changed from 1000u to 0.01u as per the magic data
+
+![image](https://user-images.githubusercontent.com/110658068/183262476-19c6fba7-8494-4071-ba42-11b53628fb6f.png)
+
+           b.	Include NMOS and PMOS libs
+          
+           c.	Creating supply voltages
+           
+           d.	Adding the type of analysis
+           
+           e.	Change the name of PMOS and NMOS devices as per the .lib files
+
+![image](https://user-images.githubusercontent.com/110658068/183262501-1cbd1159-5380-46c2-8ffb-8b56d32ce97b.png)
+
+6)	Running the simulation with the help of ngspice 
+           
+           a.	ngspice sky130_inv.spice
+
+![image](https://user-images.githubusercontent.com/110658068/183262538-ccce3ffb-df64-4e9b-b097-39779e95053a.png)
+
+           b.	plot the result  -plot y vs time a
+
+![image](https://user-images.githubusercontent.com/110658068/183262560-18812fd0-79c5-413c-ad6d-49e304b5352c.png)
+
+
+
+
+
+
 
