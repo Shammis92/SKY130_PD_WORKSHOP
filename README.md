@@ -231,9 +231,112 @@ mostly focusing on the floorplan constraints, concept of decoupling cells, power
 
 ![image](https://user-images.githubusercontent.com/110658068/183262560-18812fd0-79c5-413c-ad6d-49e304b5352c.png)
 
+# Day4 - Pre-layout timing analysis and importance of good clock tree
+
+1)	Extract LEF file from full design of inverter
+ 
+              a.	Track information present at ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info
+
+![image](https://user-images.githubusercontent.com/110658068/183288238-70b51289-2517-4aa0-9054-b2ca1f55858a.png)
 
 
+             b.	Converting grid definition according to track definition
+             
+                   i.	grid help (tkcon window)
+                   
+                   ii.	grid 0.46um 0.34um 0.23um 0.17um (tkcon window) 
 
 
+![image](https://user-images.githubusercontent.com/110658068/183288255-23896af2-a8f5-43f0-bb80-84fb304a784b.png)
+
+            c.	width of standard cell should be odd multiple of x-pitch of connecting layer
+
+![image](https://user-images.githubusercontent.com/110658068/183288275-73f7ccb6-47d6-4711-bb97-0a47d70b2a35.png)
+
+            d.	height of standard cell should be even multiple of y-pitch of connecting layer
+            
+![image](https://user-images.githubusercontent.com/110658068/183288291-380e9f8d-3da8-4997-8be2-c666bbc3b900.png)
+
+            e.	create port definition
+            f.	set port class and port use attribute
+            g.	write out the lef from magic using  lef write
+
+![image](https://user-images.githubusercontent.com/110658068/183288312-12865a0e-f649-42e0-a5dc-9d3b7913e916.png)
+
+            h.	content of lef file of inverter
+
+![image](https://user-images.githubusercontent.com/110658068/183288335-6a47af39-451e-4af2-a509-e2857ff729ab.png)
+
+2)	Include our inverter to the openlane flow
+
+            a.	Copy the lef file created for inverter to ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+            b.	Copy all .lib file from ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/ to ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+            c.	Modify config.tcl at ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/config.tcl
+            
+![image](https://user-images.githubusercontent.com/110658068/183288358-fa5a8614-ccd0-41f2-9d0d-cae6eca89730.png)
+
+            d.	Opening the openlane and adding the newly created lef file
+            
+![image](https://user-images.githubusercontent.com/110658068/183288374-a5c2e48b-c394-42ac-8cf9-b5523a4b0d8c.png)
+
+            e.	run_synthesis right after the addition of newly created inverter cell and checking whether it is included during the synthesis or not
+
+![image](https://user-images.githubusercontent.com/110658068/183288389-0fd0f1d7-4357-443d-9a2e-5e966bdd5d8f.png)
+
+            f.	after this run there are timing violations present which needs to be fixed 
+            
+            i.	changed below parameters on the fly to reduce the timing violations
+            
+ ![image](https://user-images.githubusercontent.com/110658068/183288445-c2c12ea2-baab-42f4-83c2-c2d47f6dc969.png)
+           
+            g.	run_floorplan failed due to some file issue
+            
+ ![image](https://user-images.githubusercontent.com/110658068/183288462-ad899d5d-f3c2-4dc4-86cf-b13d5f296361.png)
+ 
+            h.	ran below commands manually to create the design
+                   
+                   i.	init_floorplan
+
+                  ii.	place_io
+                 
+                 iii.	global_placement_or
+                  
+                  iv.	detailed_placement
+                   
+                   v.	tap_decap_or
+                  
+                  vi.	detailed_placement
+                 
+                 vii.	gen_pdn
+                
+                viii.	run_routing
+                
+             i.	locating the inverter cell in the design with the help of magic               
+
+![image](https://user-images.githubusercontent.com/110658068/183288511-f6a2fb48-1c47-42b6-9594-95eabc2719c2.png)
+
+![image](https://user-images.githubusercontent.com/110658068/183288519-33915800-8f94-4597-bdb9-212cfb66eab9.png)
+
+3)	running CTS with the default settings(tool – TritonCTS)
+
+             a.	run_cts
+
+![image](https://user-images.githubusercontent.com/110658068/183288538-97aaf1fa-589c-47d7-956d-7ab97c88e871.png)
+
+# Day5 - inludes the final routing stage
+
+1) routing the of design is done with the help of command run_routing
+
+![image](https://user-images.githubusercontent.com/110658068/183288647-41b3181b-d923-4e36-96d6-a179e56c5109.png)
+
+2)	final routes design in magic
+
+![image](https://user-images.githubusercontent.com/110658068/183288839-3bcdf0ad-8e23-4cc1-bfa7-54f8d89ce749.png)
+
+![image](https://user-images.githubusercontent.com/110658068/183288846-f60ccf1b-1eb9-4bc2-91f5-9c7a8eacd402.png)
 
 
+           
+       
